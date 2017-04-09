@@ -12,7 +12,7 @@ import org.glassfish.grizzly.http.server.Response;
 
 /**
  * Very small http server
- * @author James
+ * @author James Searby
  */
 public class Hello {
 
