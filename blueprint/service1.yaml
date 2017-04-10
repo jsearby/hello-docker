@@ -1,0 +1,16 @@
+# Initial service
+apiVersion: v1
+kind: Service
+metadata:
+  # Name of the service
+  name: my-service
+  labels:
+    # Important, associate here the service to the pod app name !
+    app: hello-docker-app
+spec:
+  type: NodePort
+  selector:
+    # Selector must be an exact match
+    app: hello-docker-app
+  ports:
+    - port: 8080

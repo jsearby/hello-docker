@@ -2,18 +2,39 @@
 
 This project defines a very simple docker application for tutorial purpose.
 
-It defines a small HTTP server providing access to two page
-- /time displaying a small horloge 
-- /stop stoping the running executable
+It defines a small HTTP server providing access to two pages
+- http://127.0.0.1:8080/time displaying a small horloge 
+- http://127.0.0.1:8080/stop stoping the running executable
 
-## Compilation & Prerequisite
+This server provides a very basic logging in 
+- console
+- /log/mylogfile.log
 
-To compile this project, you need to have JDK1.7 and a proper Docker cli installed.
-(You may quickly check that > docker -v is returning your a proper display)
 
-In case you don't have a docker client installed, you should look at 
+## Compilation & Prerequisites
+
+To compile this project, you need to have JDK >= 1.7 and a proper Docker cli installed.
+> mvn clean package
+
+###Troubleshooting
+
+#### Failed to execute goal com.spotify:docker-maven-plugin
+It means you are missing a proper Docker installation.
+- Either you don't have installed Docker at all (check with a "docker -v" command)
+- Either your docker engine is not running (then restart it)
+
+For more info about how to install docker engine, you should look at 
 https://docs.docker.com/toolbox/overview/
 
+#### I'm working with minikube, still my docker is not running
+You probably have forgotten to re-setup your environment parameter for your docker cli 
+> minikube start
+> FOR /f "tokens=*" %i IN ('minikube docker-env') DO %i  
+
+#### I'm working with docker-toolbox, still my docker is not running
+You probably have forgotten to re-setup your environment parameter for your docker cli 
+> docker-machine start dev 
+> FOR /f "tokens=*" %i IN ('docker-machine env --shell cmd dev') DO %i
 
 ## Classpath and dependency notes
 
