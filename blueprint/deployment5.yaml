@@ -1,0 +1,37 @@
+# Initial deployment
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  # Name of the deployment controller
+  # -> The name that will be used to manipulate with kubectl
+  name: hello-docker-deploy
+spec:
+  # Number of requested instance
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        # Name of the application (needed to link service on it)
+        app: hello-docker-app
+    spec:
+      containers:
+      # Reference to the docker images
+      - name: hello-docker-server
+        image: hellodocker_docker:1.0
+        volumeMounts:
+        - mountPath: /log
+          name: log-volume
+        ports:
+        - containerPort: 8080
+      # filesyslog
+      - name: hello-syslog
+        image: hellosyslog_docker:1.0
+        volumeMounts:
+        - mountPath: /log
+          name: log-volume
+      volumes:
+        - name: log-volume
+          persistentVolumeClaim:
+            claimName: nfs-claim1
+      securityContext: 
+        supplementalGroups: [5555] 
